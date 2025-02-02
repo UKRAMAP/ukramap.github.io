@@ -91,11 +91,11 @@
         <button onclick="nextAd()">Next (3)</button>
     </div>
     <script>
-        const ads = ["ad1.jpg", "ad2.jpg", "ad3.jpg"];
+        const ads = ["ad1.jpg", "ad2.jpg", "ad3.jpg","ad4.jpg","ad5.jpg"];
         let index = 0;
         const schedule = [
-            { hour: 9, minute: 0 },
-            { hour: 12, minute: 0 },
+            { hour: 0, minute: 5 },
+            { hour: 0, minute: 10 },
             { hour: 15, minute: 0 },
             { hour: 18, minute: 0 }
         ];
@@ -137,7 +137,7 @@
             const hours = Math.floor(diff / 3600);
             const minutes = Math.floor((diff % 3600) / 60);
             const seconds = diff % 60;
-            document.getElementById("countdown").innerText = `Next Page in: ${hours}h ${minutes}m ${seconds}s`;
+            document.getElementById("countdown").innerText = `Next: ${hours}h ${minutes}m ${seconds}s`;
             
             if (now.getHours() === nextChange.getHours() && now.getMinutes() === nextChange.getMinutes() && now.getSeconds() === 0) {
                 nextAd();
