@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Times and Talks</title>
+    <title>Electronic Signage</title>
     <style>
         body {
             margin: 0;
@@ -19,25 +19,29 @@
         }
         .ad-container {
             width: 100vw;
-            hight: 100vh;
+            height: 100vh;
             position: absolute;
-			top: 0;
-			left: 0;
+            top: 0;
+            left: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-			background-color: yellow;
-			overflow: hidden;
+            background-color: #222;
+            overflow: hidden;
         }
         img {
-            max-width: 100vw;
-            max-height: 100vh;
-            object-fit: contain;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            background-color: black;
         }
         .controls {
-            margin-top: 20px;
+            position: absolute;
+            bottom: 20px;
+            display: flex;
+            gap: 10px;
         }
-		.clock {
+        .clock {
             position: absolute;
             top: 10px;
             right: 20px;
@@ -45,11 +49,10 @@
             background: rgba(0, 0, 0, 0.5);
             padding: 10px;
             border-radius: 5px;
-		}
+        }
         button {
             padding: 10px 20px;
             font-size: 16px;
-            margin: 5px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -65,8 +68,8 @@
     <div class="ad-container">
         <img id="ad-image" src="ad1.jpg" alt="Advertisement">
     </div>
+    <div class="clock" id="clock"></div>
     <div class="controls">
-	<div class="clock" id="clock"></div>
         <button onclick="prevAd()">Prev (1)</button>
         <button onclick="restartAd()">Restart (2)</button>
         <button onclick="nextAd()">Next (3)</button>
@@ -105,14 +108,14 @@
             });
         }
         
-		function updateClock() {
+        function updateClock() {
             const now = new Date();
             const hours = now.getHours().toString().padStart(2, '0');
             const minutes = now.getMinutes().toString().padStart(2, '0');
             const seconds = now.getSeconds().toString().padStart(2, '0');
             document.getElementById("clock").innerText = `${hours}:${minutes}:${seconds}`;
         }
-		
+        
         document.addEventListener("keydown", function(event) {
             if (event.key === "1") {
                 prevAd();
@@ -124,6 +127,8 @@
         });
         
         setInterval(checkSchedule, 60000); // Check schedule every minute
+        setInterval(updateClock, 1000); // Update clock every single second
+        updateClock(); // Initial call to display time immediately
     </script>
 </body>
 </html>
