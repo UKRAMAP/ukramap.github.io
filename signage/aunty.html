@@ -30,9 +30,10 @@
             overflow: hidden;
         }
         img {
-            width: auto;
             height: 100vh;
-            object-fit: cover;
+            width: auto;
+            max-width: 100vw;
+            object-fit: contain;
             background-color: black;
         }
         .controls {
@@ -45,10 +46,23 @@
             position: absolute;
             top: 10px;
             right: 20px;
-            font-size: 24px;
+            font-size: 2vw;
             background: rgba(0, 0, 0, 0.5);
             padding: 10px;
             border-radius: 5px;
+        }
+        .countdown {
+            position: absolute;
+            bottom: 50px;
+            font-size: 2vw;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        @media (max-width: 600px) {
+            .clock, .countdown {
+                font-size: 24px;
+            }
         }
         button {
             padding: 10px 20px;
@@ -69,27 +83,33 @@
         <img id="ad-image" src="ad1.jpg" alt="Advertisement">
     </div>
     <div class="clock" id="clock"></div>
+    <div class="countdown" id="countdown"></div>
     <div class="controls">
         <button onclick="prevAd()">Prev (1)</button>
         <button onclick="restartAd()">Restart (2)</button>
         <button onclick="nextAd()">Next (3)</button>
     </div>
     <script>
-        const ads = ["ad1.jpg", "ad2.jpg", "ad3.jpg","ad4.jpg"];
+        const ads = ["ad1.jpg", "ad2.jpg", "ad3.jpg"];
+        let index = 0;
+        let countdownTime = 30; // seconds until auto-advance
         
         function nextAd() {
             index = (index + 1) % ads.length;
             document.getElementById("ad-image").src = ads[index];
+            resetCountdown();
         }
         
         function prevAd() {
             index = (index - 1 + ads.length) % ads.length;
             document.getElementById("ad-image").src = ads[index];
+            resetCountdown();
         }
         
         function restartAd() {
             index = 0;
             document.getElementById("ad-image").src = ads[index];
+            resetCountdown();
         }
         
         function checkSchedule() {
@@ -115,6 +135,18 @@
             document.getElementById("clock").innerText = `${hours}:${minutes}:${seconds}`;
         }
         
+        function updateCountdown() {
+            document.getElementById("countdown").innerText = `Next ad in: ${countdownTime} sec`;
+            if (countdownTime === 0) {
+                nextAd();
+            }
+            countdownTime--;
+        }
+        
+        function resetCountdown() {
+            countdownTime = 30;
+        }
+        
         document.addEventListener("keydown", function(event) {
             if (event.key === "1") {
                 prevAd();
@@ -126,8 +158,10 @@
         });
         
         setInterval(checkSchedule, 60000); // Check schedule every minute
-        setInterval(updateClock, 1000); // Update clock every single second
+        setInterval(updateClock, 1000); // Update clock every second
+        setInterval(updateCountdown, 1000); // Update countdown every second
         updateClock(); // Initial call to display time immediately
+        updateCountdown(); // Initial call to display countdown immediately
     </script>
 </body>
 </html>
