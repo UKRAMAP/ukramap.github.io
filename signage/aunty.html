@@ -53,7 +53,8 @@
         }
         .countdown {
             position: absolute;
-            bottom: 50px;
+            bottom: 10px;
+            right: 20px;
             font-size: 2vw;
             background: rgba(0, 0, 0, 0.5);
             padding: 10px;
@@ -90,7 +91,7 @@
         <button onclick="nextAd()">Next (3)</button>
     </div>
     <script>
-        const ads = ["ad1.jpg", "ad2.jpg", "ad3.jpg","ad4.jpg"];
+        const ads = ["ad1.jpg", "ad2.jpg", "ad3.jpg"];
         let index = 0;
         const schedule = [
             { hour: 9, minute: 0 },
@@ -133,7 +134,10 @@
             }
             
             const diff = Math.floor((nextChange - now) / 1000);
-            document.getElementById("countdown").innerText = `Next ad in: ${Math.floor(diff / 60)} min ${diff % 60} sec`;
+            const hours = Math.floor(diff / 3600);
+            const minutes = Math.floor((diff % 3600) / 60);
+            const seconds = diff % 60;
+            document.getElementById("countdown").innerText = `Next Page in: ${hours}h ${minutes}m ${seconds}s`;
             
             if (now.getHours() === nextChange.getHours() && now.getMinutes() === nextChange.getMinutes() && now.getSeconds() === 0) {
                 nextAd();
