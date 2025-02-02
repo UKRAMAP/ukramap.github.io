@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electronic Signage</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .ad-container {
+            width: 80%;
+            max-width: 800px;
+            height: 450px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #222;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+            padding: 20px;
+        }
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 10px;
+        }
+        .controls {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #444;
+            color: white;
+        }
+        button:hover {
+            background-color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="ad-container">
+        <img id="ad-image" src="ad1.jpg" alt="Advertisement">
+    </div>
+    <div class="controls">
+        <button onclick="prevAd()">Prev (1)</button>
+        <button onclick="restartAd()">Restart (2)</button>
+        <button onclick="nextAd()">Next (3)</button>
+    </div>
+    <script>
+        const ads = ["slide1.jpg", "slide2.jpg", "slide3.jpg"];
+        let index = 0;
+        
+        function nextAd() {
+            index = (index + 1) % ads.length;
+            document.getElementById("ad-image").src = ads[index];
+        }
+        
+        function prevAd() {
+            index = (index - 1 + ads.length) % ads.length;
+            document.getElementById("ad-image").src = ads[index];
+        }
+        
+        function restartAd() {
+            index = 0;
+            document.getElementById("ad-image").src = ads[index];
+        }
+        
+        function checkSchedule() {
+            const now = new Date();
+            const schedule = [
+                { hour: 9, minute: 0 },
+                { hour: 12, minute: 0 },
+                { hour: 15, minute: 0 },
+                { hour: 18, minute: 0 }
+            ];
+            schedule.forEach(time => {
+                if (now.getHours() === time.hour && now.getMinutes() === time.minute) {
+                    nextAd();
+                }
+            });
+        }
+        
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "1") {
+                prevAd();
+            } else if (event.key === "2") {
+                restartAd();
+            } else if (event.key === "3") {
+                nextAd();
+            }
+        });
+        
+        setInterval(checkSchedule, 60000); // Check schedule every minute
+    </script>
+</body>
+</html>
