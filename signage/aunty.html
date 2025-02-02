@@ -90,41 +90,54 @@
         <button onclick="nextAd()">Next (3)</button>
     </div>
     <script>
-        const ads = ["ad1.jpg", "ad2.jpg", "ad3.jpg"];
+        const ads = ["ad1.jpg", "ad2.jpg", "ad3.jpg","ad4.jpg"];
         let index = 0;
-        let countdownTime = 30; // seconds until auto-advance
-        
+        const schedule = [
+            { hour: 9, minute: 0 },
+            { hour: 12, minute: 0 },
+            { hour: 15, minute: 0 },
+            { hour: 18, minute: 0 }
+        ];
+
         function nextAd() {
             index = (index + 1) % ads.length;
             document.getElementById("ad-image").src = ads[index];
-            resetCountdown();
         }
         
         function prevAd() {
             index = (index - 1 + ads.length) % ads.length;
             document.getElementById("ad-image").src = ads[index];
-            resetCountdown();
         }
         
         function restartAd() {
             index = 0;
             document.getElementById("ad-image").src = ads[index];
-            resetCountdown();
         }
         
         function checkSchedule() {
             const now = new Date();
-            const schedule = [
-                { hour: 9, minute: 0 },
-                { hour: 12, minute: 0 },
-                { hour: 15, minute: 0 },
-                { hour: 18, minute: 0 }
-            ];
-            schedule.forEach(time => {
-                if (now.getHours() === time.hour && now.getMinutes() === time.minute) {
-                    nextAd();
+            let nextChange = null;
+            
+            for (let time of schedule) {
+                const scheduleTime = new Date();
+                scheduleTime.setHours(time.hour, time.minute, 0, 0);
+                if (scheduleTime > now) {
+                    nextChange = scheduleTime;
+                    break;
                 }
-            });
+            }
+            if (!nextChange) {
+                nextChange = new Date();
+                nextChange.setHours(schedule[0].hour, schedule[0].minute, 0, 0);
+                nextChange.setDate(nextChange.getDate() + 1);
+            }
+            
+            const diff = Math.floor((nextChange - now) / 1000);
+            document.getElementById("countdown").innerText = `Next ad in: ${Math.floor(diff / 60)} min ${diff % 60} sec`;
+            
+            if (now.getHours() === nextChange.getHours() && now.getMinutes() === nextChange.getMinutes() && now.getSeconds() === 0) {
+                nextAd();
+            }
         }
         
         function updateClock() {
@@ -133,18 +146,6 @@
             const minutes = now.getMinutes().toString().padStart(2, '0');
             const seconds = now.getSeconds().toString().padStart(2, '0');
             document.getElementById("clock").innerText = `${hours}:${minutes}:${seconds}`;
-        }
-        
-        function updateCountdown() {
-            document.getElementById("countdown").innerText = `Next ad in: ${countdownTime} sec`;
-            if (countdownTime === 0) {
-                nextAd();
-            }
-            countdownTime--;
-        }
-        
-        function resetCountdown() {
-            countdownTime = 30;
         }
         
         document.addEventListener("keydown", function(event) {
@@ -157,11 +158,10 @@
             }
         });
         
-        setInterval(checkSchedule, 60000); // Check schedule every minute
+        setInterval(checkSchedule, 1000); // Update countdown every second
         setInterval(updateClock, 1000); // Update clock every second
-        setInterval(updateCountdown, 1000); // Update countdown every second
         updateClock(); // Initial call to display time immediately
-        updateCountdown(); // Initial call to display countdown immediately
+        checkSchedule(); // Initial call to display countdown immediately
     </script>
 </body>
 </html>
