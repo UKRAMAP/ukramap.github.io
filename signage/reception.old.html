@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reception</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .ad-container {
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #222;
+            overflow: hidden;
+        }
+        img {
+            height: 100vh;
+            width: auto;
+            max-width: 100vw;
+            object-fit: contain;
+            background-color: black;
+        }
+        .clock {
+            position: absolute;
+            top: 10px;
+            right: 50px;
+            font-size: 2vw;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .countdown {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            font-size: 2vw;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .controls {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #444;
+            color: white;
+        }
+        button:hover {
+            background-color: #666;
+        }
+        @media (max-width: 600px) {
+            .clock, .countdown {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ad-container">
+        <img id="ad-image" src="ad1.jpg" alt="Advertisement">
+    </div>
+    <div class="clock" id="clock"></div>
+    <div class="countdown" id="countdown"></div>
+    <div class="controls">
+        <button onclick="prevAd()">Prev</button>
+        <button onclick="restartAd()">Restart</button>
+        <button onclick="nextAd()">Next</button>
+    </div>
+    <script>
+        const ads = ["ad1.jpg", "ad2.jpg", "ad3.jpg", "ad4.jpg", "ad5.jpg"];
+        let index = 0;
+        
+        function updateClock() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            document.getElementById("clock").innerText = `${hours}:${minutes}`;
+        }
+        
+        function nextAd() {
+            index = (index + 1) % ads.length;
+            document.getElementById("ad-image").src = ads[index];
+        }
+        
+        function prevAd() {
+            index = (index - 1 + ads.length) % ads.length;
+            document.getElementById("ad-image").src = ads[index];
+        }
+        
+        function restartAd() {
+            index = 0;
+            document.getElementById("ad-image").src = ads[index];
+        }
+        
+        setInterval(updateClock, 1000);
+        updateClock();
+        setInterval(nextAd, 120000); // Change slide every 2 minutes
+    </script>
+</body>
+</html>
