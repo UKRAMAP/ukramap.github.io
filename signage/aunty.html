@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Electronic Signage</title>
+    <title>Reception</title>
     <style>
         body {
             margin: 0;
@@ -36,12 +36,6 @@
             object-fit: contain;
             background-color: black;
         }
-        .controls {
-            position: absolute;
-            bottom: 20px;
-            display: flex;
-            gap: 10px;
-        }
         .clock {
             position: absolute;
             top: 10px;
@@ -60,10 +54,14 @@
             padding: 10px;
             border-radius: 5px;
         }
-        @media (max-width: 600px) {
-            .clock, .countdown {
-                font-size: 24px;
-            }
+        .controls {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
         button {
             padding: 10px 20px;
@@ -77,6 +75,11 @@
         button:hover {
             background-color: #666;
         }
+        @media (max-width: 600px) {
+            .clock, .countdown {
+                font-size: 24px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -86,86 +89,32 @@
     <div class="clock" id="clock"></div>
     <div class="countdown" id="countdown"></div>
     <div class="controls">
-        <button onclick="prevAd()">Prev (1)</button>
-        <button onclick="restartAd()">Restart (2)</button>
-        <button onclick="nextAd()">Next (3)</button>
+        <button onclick="prevAd()">Prev</button>
+        <button onclick="restartAd()">Restart</button>
+        <button onclick="nextAd()">Next</button>
     </div>
     <script>
-        const ads = ["ad1.jpg", "ad2.jpg", "ad3.jpg","ad4.jpg","ad5.jpg"];
-        let index = 0;
-        const schedule = [
-            { hour: 0, minute: 5 },
-            { hour: 0, minute: 10 },
-            { hour: 15, minute: 0 },
-            { hour: 18, minute: 0 }
-        ];
-
-        function nextAd() {
-            index = (index + 1) % ads.length;
-            document.getElementById("ad-image").src = ads[index];
-        }
-        
-        function prevAd() {
-            index = (index - 1 + ads.length) % ads.length;
-            document.getElementById("ad-image").src = ads[index];
-        }
-        
-        function restartAd() {
-            index = 0;
-            document.getElementById("ad-image").src = ads[index];
-        }
-        
-        function checkSchedule() {
-            const now = new Date();
-            let nextChange = null;
-            
-            for (let time of schedule) {
-                const scheduleTime = new Date();
-                scheduleTime.setHours(time.hour, time.minute, 0, 0);
-                if (scheduleTime > now) {
-                    nextChange = scheduleTime;
-                    break;
-                }
-            }
-            if (!nextChange) {
-                nextChange = new Date();
-                nextChange.setHours(schedule[0].hour, schedule[0].minute, 0, 0);
-                nextChange.setDate(nextChange.getDate() + 1);
-            }
-            
-            const diff = Math.floor((nextChange - now) / 1000);
-            const hours = Math.floor(diff / 3600);
-            const minutes = Math.floor((diff % 3600) / 60);
-            const seconds = diff % 60;
-            document.getElementById("countdown").innerText = `Next: ${hours}h ${minutes}m ${seconds}s`;
-            
-            if (now.getHours() === nextChange.getHours() && now.getMinutes() === nextChange.getMinutes() && now.getSeconds() === 0) {
-                nextAd();
-            }
-        }
-        
         function updateClock() {
             const now = new Date();
             const hours = now.getHours().toString().padStart(2, '0');
             const minutes = now.getMinutes().toString().padStart(2, '0');
-            const seconds = now.getSeconds().toString().padStart(2, '0');
-            document.getElementById("clock").innerText = `${hours}:${minutes}:${seconds}`;
+            document.getElementById("clock").innerText = `${hours}:${minutes}`;
         }
         
-        document.addEventListener("keydown", function(event) {
-            if (event.key === "1") {
-                prevAd();
-            } else if (event.key === "2") {
-                restartAd();
-            } else if (event.key === "3") {
-                nextAd();
-            }
-        });
+        function prevAd() {
+            console.log("Previous ad");
+        }
         
-        setInterval(checkSchedule, 1000); // Update countdown every second
-        setInterval(updateClock, 1000); // Update clock every second
-        updateClock(); // Initial call to display time immediately
-        checkSchedule(); // Initial call to display countdown immediately
+        function restartAd() {
+            console.log("Restart ad");
+        }
+        
+        function nextAd() {
+            console.log("Next ad");
+        }
+        
+        setInterval(updateClock, 1000);
+        updateClock();
     </script>
 </body>
 </html>
