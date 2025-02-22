@@ -40,8 +40,8 @@
         .clock {
             position: absolute;
             top: 10px;
-            right: 80px;
-            font-size: 8vw; /* Larger clock size */
+            right: 75px;
+            font-size: 80px;
             background: rgba(0, 0, 0, 0.5);
             padding: 10px;
             border-radius: 5px;
@@ -97,7 +97,6 @@
     <script>
         const ads = ["ad1.jpg", "ad2.jpg", "ad3.jpg", "ad4.jpg", "ad5.jpg"];
         let index = 0;
-        let isTransitioning = false; // Flag to prevent multiple updates during transitions
         
         function updateClock() {
             const now = new Date();
@@ -107,47 +106,38 @@
         }
 
         function nextAd() {
-            if (isTransitioning) return; // Prevent changing ad while transition is in progress
             const img = document.getElementById("ad-image");
-            isTransitioning = true; // Set flag to true, indicating transition is happening
-            img.style.transform = "scale(0.9)"; // Start the transition
+            img.style.transform = "scale(0.9)";
             setTimeout(() => {
-                index = (index + 1) % ads.length; // Move to the next ad
-                img.src = ads[index]; // Update the ad image
-                img.style.transform = "scale(1)"; // End the transition
-                isTransitioning = false; // Reset flag once transition is done
-            }, 1000); // Wait for the 1-second transition
+                index = (index + 1) % ads.length;
+                img.src = ads[index];
+                img.style.transform = "scale(1)";
+            }, 1000);
         }
 
         function prevAd() {
-            if (isTransitioning) return; // Prevent changing ad while transition is in progress
             const img = document.getElementById("ad-image");
-            isTransitioning = true; // Set flag to true, indicating transition is happening
-            img.style.transform = "scale(0.9)"; // Start the transition
+            img.style.transform = "scale(0.9)";
             setTimeout(() => {
-                index = (index - 1 + ads.length) % ads.length; // Move to the previous ad
-                img.src = ads[index]; // Update the ad image
-                img.style.transform = "scale(1)"; // End the transition
-                isTransitioning = false; // Reset flag once transition is done
-            }, 1000); // Wait for the 1-second transition
+                index = (index - 1 + ads.length) % ads.length;
+                img.src = ads[index];
+                img.style.transform = "scale(1)";
+            }, 1000);
         }
 
         function restartAd() {
-            if (isTransitioning) return; // Prevent changing ad while transition is in progress
             const img = document.getElementById("ad-image");
-            isTransitioning = true; // Set flag to true, indicating transition is happening
-            img.style.transform = "scale(0.9)"; // Start the transition
+            img.style.transform = "scale(0.9)";
             setTimeout(() => {
-                index = 0; // Restart at the first ad
-                img.src = ads[index]; // Update the ad image
-                img.style.transform = "scale(1)"; // End the transition
-                isTransitioning = false; // Reset flag once transition is done
-            }, 1000); // Wait for the 1-second transition
+                index = 0;
+                img.src = ads[index];
+                img.style.transform = "scale(1)";
+            }, 1000);
         }
 
-        setInterval(updateClock, 1000); // Update clock every second
-        updateClock(); // Initialize clock display
-        setInterval(nextAd, 30000); // Change slide every 30 seconds
+        setInterval(updateClock, 1000);
+        updateClock();
+        setInterval(nextAd, 45000); // Change slide every 30 seconds
     </script>
 </body>
 </html>
