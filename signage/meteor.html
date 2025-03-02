@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embedded Site</title>
+    <style>
+        /* Ensure the body and html elements take up full height */
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        /* Add a 5% margin and a black border to the iframe */
+        iframe {
+            width: calc(100% - 10%);  /* 100% width minus the 5% margin on each side */
+            height: calc(100% - 10%); /* 100% height minus the 5% margin on top and bottom */
+            border: 5px solid black;  /* Black border around the iframe */
+            margin: 5%;  /* 5% margin around the iframe */
+            box-sizing: border-box;  /* Ensure the border is included in the size calculations */
+        }
+    </style>
+</head>
+<body>
+    <iframe src="https://ukmeteorbeacon.org/beaconclient/"></iframe>
+</body>
+</html>
