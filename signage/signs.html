@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Signage</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        #content {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+        .line {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="content">Loading...</div>
+    
+    <script>
+        let pages = [];
+        let currentIndex = 0;
+
+        function loadPages() {
+            fetch('pages.json')
+                .then(response => response.json())
+                .then(data => {
+                    pages = data.pages;
+                    showNextPage();
+                })
+                .catch(error => {
+                    console.error('Error loading pages:', error);
+                    document.getElementById('content').innerText = 'Error loading content';
+                });
+        }
+
+        function showNextPage() {
+            if (pages.length > 0) {
+                let page = pages[currentIndex];
+                let contentDiv = document.getElementById('content');
+                contentDiv.innerHTML = '';
+                
+                page.lines.forEach(line => {
+                    let lineElem = document.createElement('div');
+                    lineElem.className = 'line';
+                    lineElem.innerText = line.text;
+                    lineElem.style.fontSize = line.fontSize + 'px';
+                    
+                    if (line.bold) lineElem.style.fontWeight = 'bold';
+                    if (line.italic) lineElem.style.fontStyle = 'italic';
+                    if (line.underline) lineElem.style.textDecoration = 'underline';
+                    
+                    contentDiv.appendChild(lineElem);
+                });
+
+                currentIndex = (currentIndex + 1) % pages.length;
+            }
+            setTimeout(showNextPage, 30000);
+        }
+
+        loadPages();
+    </script>
+</body>
+</html>
