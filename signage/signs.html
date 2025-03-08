@@ -17,6 +17,7 @@
             align-items: center;
             height: 100vh;
             text-align: center;
+            position: relative;
         }
         #content {
             background: rgba(0, 0, 0, 0.5);
@@ -27,12 +28,33 @@
         .line {
             margin: 10px 0;
         }
+        #clock {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 3vw;
+            font-weight: bold;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
+    <div id="clock">00:00:00</div>
     <div id="content">Loading...</div>
     
     <script>
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').innerText = `${hours}:${minutes}:${seconds}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
         let pages = [];
         let currentIndex = 0;
 
@@ -59,7 +81,7 @@
                     let lineElem = document.createElement('div');
                     lineElem.className = 'line';
                     lineElem.innerText = line.text;
-                    lineElem.style.fontSize = line.fontSize + 'px';
+                    lineElem.style.fontSize = line.fontSize + 'vw'; // Use vw instead of px
                     
                     if (line.bold) lineElem.style.fontWeight = 'bold';
                     if (line.italic) lineElem.style.fontStyle = 'italic';
