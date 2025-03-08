@@ -5,9 +5,9 @@
             { "text": "Times 09:00, 10:30", "fontSize": 8, "italic": true } ] },
         { "lines": [
             { "text": "Lecture two", "fontSize": 10, "bold": true },
-            { "text": "Tech Conference 2025", "fontSize": 8, "bold": true, "italic": true } ] },
+            { "text": "Times 10:00,13:00", "fontSize": 8, "bold": true, "italic": true } ] },
         { "lines": [ 
-            { "text": "Follow us on social media", "fontSize": 10, "italic": true },
+            { "text": "Follow us on social media", "fontSize": 8, "italic": true },
             { "text": "@obs king", "fontSize": 8, "bold": true, "underline": true } ] }
            ]
 }
