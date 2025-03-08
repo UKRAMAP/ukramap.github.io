@@ -2,12 +2,12 @@
     "pages": [
          { "lines": [
             { "text": "Lecture one", "fontSize": 10, "bold": true },
-            { "text": "Times 09:00, 10:30", "fontSize": 60, "italic": true } ] },
+            { "text": "Times 09:00, 10:30", "fontSize": 8, "italic": true } ] },
         { "lines": [
-            { "text": "Lecture two", "fontSize": 40, "bold": true },
-            { "text": "Tech Conference 2025", "fontSize": 80, "bold": true, "italic": true } ] },
+            { "text": "Lecture two", "fontSize": 16, "bold": true },
+            { "text": "Tech Conference 2025", "fontSize": 10, "bold": true, "italic": true } ] },
         { "lines": [ 
-            { "text": "Follow us on social media", "fontSize": 50, "italic": true },
-            { "text": "@obs king", "fontSize": 36, "bold": true, "underline": true } ] }
+            { "text": "Follow us on social media", "fontSize": 20, "italic": true },
+            { "text": "@obs king", "fontSize": 18, "bold": true, "underline": true } ] }
            ]
 }
