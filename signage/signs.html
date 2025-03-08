@@ -41,7 +41,7 @@
     </style>
 </head>
 <body>
-    <div id="clock">00:00:00</div>
+    <div id="clock">00:00</div>
     <div id="content">Loading...</div>
     
     <script>
@@ -49,20 +49,23 @@
             const now = new Date();
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            document.getElementById('clock').innerText = `${hours}:${minutes}:${seconds}`;
+            document.getElementById('clock').innerText = `${hours}:${minutes}`;
         }
         setInterval(updateClock, 1000);
         updateClock();
 
         let pages = [];
         let currentIndex = 0;
+        let slideDelay = 30; // Default slide delay in seconds
 
         function loadPages() {
             fetch('pages.json')
                 .then(response => response.json())
                 .then(data => {
                     pages = data.pages;
+                    if (data.slideDelay) {
+                        slideDelay = data.slideDelay;
+                    }
                     showNextPage();
                 })
                 .catch(error => {
@@ -92,7 +95,7 @@
 
                 currentIndex = (currentIndex + 1) % pages.length;
             }
-            setTimeout(showNextPage, 30000);
+            setTimeout(showNextPage, slideDelay * 1000);
         }
 
         loadPages();

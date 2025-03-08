@@ -1,4 +1,5 @@
-{ 
+{
+    "slideDelay":10,
     "pages": [
          { "lines": [
             { "text": "Lecture one", "fontSize": 10, "bold": true },
