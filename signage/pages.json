@@ -1,10 +1,10 @@
 {
     "slideDelay":10,
     "clockVisible":true,
-    "clockSize":"large",
+    "clockSize":"small",
     "pages": [
          { "lines": [
-            { "text": "Lecture one", "fontSize": 10, "bold": true },
+            { "text": "Lecture One", "fontSize": 10, "bold": true },
             { "text": "by Big Dave", "fontSize": 8, "italic": true},
             { "text": "Times 09:00, 10:30", "fontSize": 8, "italic": true } ] },
         { "lines": [
