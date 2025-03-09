@@ -97,7 +97,7 @@
     </div>
 
     <script>
-        const PASSWORD = "admin123"; // Change this for security
+        const PASSWORD = "Not4Girls"; // Change this for security
 
         function authenticate() {
             let passInput = document.getElementById('password').value;
@@ -171,8 +171,8 @@
         }
 
         function uploadToGitHub(jsonData) {
-            let token = "YOUR_GITHUB_ACCESS_TOKEN"; // Replace with your GitHub token
-            let repo = "your-username/your-repo"; // Replace with your GitHub repo
+            let token = "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"; // GitHub token
+            let repo = "UKRAMAP/ukramap.github.io"; // GitHub repo
             let filePath = "pages.json";
 
             fetch(`https://api.github.com/repos/${repo}/contents/${filePath}`, {
