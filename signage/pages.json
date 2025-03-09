@@ -1,7 +1,7 @@
 {
-    "slideDelay":10,
     "clockVisible":true,
     "clockSize":"small",
+    "slideDelay":10,
     "pages": [
          { "lines": [
             { "text": "Lecture One", "fontSize": 10, "bold": true },
