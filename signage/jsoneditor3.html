@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Editor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .button:hover {
+            background-color: #218838;
+        }
+        .button-secondary {
+            background-color: #dc3545;
+        }
+        .button-secondary:hover {
+            background-color: #c82333;
+        }
+        .button-help {
+            background-color: #007bff;
+        }
+        .button-help:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Edit Signage JSON</h2>
+        <div id="login-section">
+            <label for="password">Enter Password:</label>
+            <input type="password" id="password">
+            <button class="button" onclick="authenticate()">Login</button>
+        </div>
+        
+        <div id="editor" style="display:none;">
+            <label for="clockVisible">Do you want the clock to be visible?</label>
+            <select id="clockVisible">
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+            </select>
+            
+            <label for="clockSize">Clock large or small?</label>
+            <select id="clockSize">
+                <option value="small">Small</option>
+                <option value="large">Large</option>
+            </select>
+            
+            <label for="clockColor">What colour should the clock numbers be?</label>
+            <input type="color" id="clockColorPicker">
+            <input type="text" id="clockColor" value="rgba(200, 200, 200, 1)">
+            <small>Pick a color or enter an RGBA value manually.</small>
+            
+            <label for="slideDelay">How many seconds before the pages change?</label>
+            <input type="number" id="slideDelay" value="30">
+            
+            <p>Use the page button to add new pages, you may add as many pages as you like</p>
+            
+            <h3>Pages</h3>
+            <div id="pages"></div>
+            <button class="button" onclick="addPage()">Add Page</button>
+            <br><br>
+            <button class="button" onclick="saveJson()">Save Changes</button>
+            <button class="button button-secondary" onclick="cancelChanges()">Cancel</button>
+            <button class="button button-help" onclick="openHelp()">Help Page</button>
+        </div>
+    </div>
+    
+    <script>
+        const PASSWORD = "Mercury123"; // Change this for security
+        
+        function authenticate() {
+            let passInput = document.getElementById('password').value;
+            if (passInput === PASSWORD) {
+                document.getElementById('editor').style.display = 'block';
+                document.getElementById('login-section').style.display = 'none'; // Hide login section
+            } else {
+                alert('Incorrect password!');
+            }
+        }
+        
+        function cancelChanges() {
+            window.location.href = "index.html"; // Redirect to another page or leave as needed
+        }
+        
+        function openHelp() {
+            window.open("jsonhelp.html", "_blank"); // Open help page in a new tab
+        }
+        
+        function saveJson() {
+            let clockVisible = document.getElementById('clockVisible').value === "true";
+            let clockSize = document.getElementById('clockSize').value;
+            let clockColor = document.getElementById('clockColor').value;
+            let slideDelay = parseInt(document.getElementById('slideDelay').value);
+            
+            let pages = [];
+            document.querySelectorAll('#pages > div').forEach(pageDiv => {
+                let page = {
+                    textColor: pageDiv.children[1].value,
+                    lines: [
+                        {
+                            text: pageDiv.children[3].value,
+                            fontSize: parseInt(pageDiv.children[5].value),
+                            bold: pageDiv.children[7].value === "true",
+                            italic: pageDiv.children[9].value === "true",
+                            underline: pageDiv.children[11].value === "true"
+                        }
+                    ]
+                };
+                pages.push(page);
+            });
+            
+            let jsonData = {
+                slideDelay,
+                clockVisible,
+                clockSize,
+                clockColor,
+                pages
+            };
+            
+            uploadToGitHub(jsonData);
+        }
+        
+        function uploadToGitHub(jsonData) {
+            let token = "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";
+            let repo = "UKRAMAP/ukramap.github.io";
+            let filePath = "signage/pages.json";
+            
+            fetch(`https://api.github.com/repos/${repo}/contents/${filePath}`, {
+                method: "PUT",
+                headers: {
+                    "Authorization": `token ${token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    message: "Updating JSON",
+                    content: btoa(JSON.stringify(jsonData, null, 2))
+                })
+            }).then(response => response.json())
+              .then(data => alert("JSON Updated Successfully!"))
+              .catch(error => alert("Error updating JSON"));
+        }
+    </script>
+</body>
+</html>
