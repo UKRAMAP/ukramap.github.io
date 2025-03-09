@@ -1,9 +1,12 @@
 {
     "clockVisible":true,
-    "clockSize":"small",
+    "clockSize":"large",
+    "clockColor": "rgba(150,150,150, 1)",
     "slideDelay":10,
     "pages": [
-         { "lines": [
+        {
+            "textColor": "rgba(255,0,0,1)",
+            "lines": [
             { "text": "Lecture One", "fontSize": 10, "bold": true },
             { "text": "by Big Dave", "fontSize": 8, "italic": true},
             { "text": "Times 09:00, 10:30", "fontSize": 8, "italic": true } ] },

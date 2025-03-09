@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Editor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Edit Signage JSON</h2>
+        <label for="password">Enter Password:</label>
+        <input type="password" id="password">
+        <button class="button" onclick="authenticate()">Login</button>
+        
+        <div id="editor" style="display:none;">
+            <label for="clockVisible">Clock Visible:</label>
+            <select id="clockVisible">
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+            </select>
+            
+            <label for="clockSize">Clock Size:</label>
+            <select id="clockSize">
+                <option value="small">Small</option>
+                <option value="large">Large</option>
+            </select>
+            
+            <label for="clockColor">Clock Color (RGBA):</label>
+            <input type="text" id="clockColor" value="rgba(200, 200, 200, 1)">
+            
+            <label for="slideDelay">Slide Delay (Seconds):</label>
+            <input type="number" id="slideDelay" value="30">
+            
+            <h3>Pages</h3>
+            <div id="pages"></div>
+            <button class="button" onclick="addPage()">Add Page</button>
+            <br><br>
+            <button class="button" onclick="saveJson()">Save JSON</button>
+        </div>
+    </div>
+    
+    <script>
+        const PASSWORD = "Mercury123"; // Temp I promise
+        
+        function authenticate() {
+            let passInput = document.getElementById('password').value;
+            if (passInput === PASSWORD) {
+                document.getElementById('editor').style.display = 'block';
+            } else {
+                alert('Incorrect password!');
+            }
+        }
+        
+        function addPage() {
+            let pagesDiv = document.getElementById('pages');
+            let pageDiv = document.createElement('div');
+            pageDiv.innerHTML = `
+                <label>Text Color (RGBA):</label>
+                <input type="text" value="rgba(255,255,255,1)">
+                <label>Text:</label>
+                <input type="text">
+                <label>Font Size (vw):</label>
+                <input type="number" value="3">
+                <label>Bold:</label>
+                <select><option value="false">No</option><option value="true">Yes</option></select>
+                <label>Italic:</label>
+                <select><option value="false">No</option><option value="true">Yes</option></select>
+                <label>Underline:</label>
+                <select><option value="false">No</option><option value="true">Yes</option></select>
+                <button onclick="removePage(this)">Remove</button>
+                <hr>
+            `;
+            pagesDiv.appendChild(pageDiv);
+        }
+        
+        function removePage(button) {
+            button.parentElement.remove();
+        }
+        
+        function saveJson() {
+            let clockVisible = document.getElementById('clockVisible').value === "true";
+            let clockSize = document.getElementById('clockSize').value;
+            let clockColor = document.getElementById('clockColor').value;
+            let slideDelay = parseInt(document.getElementById('slideDelay').value);
+            
+            let pages = [];
+            document.querySelectorAll('#pages > div').forEach(pageDiv => {
+                let page = {
+                    textColor: pageDiv.children[0].value,
+                    lines: [
+                        {
+                            text: pageDiv.children[2].value,
+                            fontSize: parseInt(pageDiv.children[4].value),
+                            bold: pageDiv.children[6].value === "true",
+                            italic: pageDiv.children[8].value === "true",
+                            underline: pageDiv.children[10].value === "true"
+                        }
+                    ]
+                };
+                pages.push(page);
+            });
+            
+            let jsonData = {
+                slideDelay,
+                clockVisible,
+                clockSize,
+                clockColor,
+                pages
+            };
+            
+            uploadToGitHub(jsonData);
+        }
+        
+        function uploadToGitHub(jsonData) {
+            let token = "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"; // Replace with your GitHub token
+            let repo = "UKRAMAP/ukramap.github.io";
+            let filePath = "signage/pages.json";
+            
+            fetch(`https://api.github.com/repos/${repo}/contents/${filePath}`, {
+                method: "PUT",
+                headers: {
+                    "Authorization": `token ${token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    message: "Updating JSON",
+                    content: btoa(JSON.stringify(jsonData, null, 2))
+                })
+            }).then(response => response.json())
+              .then(data => alert("JSON Updated Successfully!"))
+              .catch(error => alert("Error updating JSON"));
+        }
+    </script>
+</body>
+</html>
