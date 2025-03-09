@@ -11,7 +11,6 @@
             background: url('background.jpg') no-repeat center center fixed;
             background-size: cover;
             font-family: Arial, sans-serif;
-            color: white;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -32,7 +31,6 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            font-size: 3vw;
             font-weight: bold;
             background: rgba(0, 0, 0, 0.5);
             padding: 10px;
@@ -45,6 +43,12 @@
     <div id="content">Loading...</div>
     
     <script>
+        let pages = [];
+        let currentIndex = 0;
+        let slideDelay = 30; // Default slide delay in seconds
+        let clockVisible = true; // Default clock visibility
+        let clockSize = 'small'; // Default clock size
+
         function updateClock() {
             const now = new Date();
             const hours = String(now.getHours()).padStart(2, '0');
@@ -54,18 +58,15 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        let pages = [];
-        let currentIndex = 0;
-        let slideDelay = 30; // Default slide delay in seconds
-
         function loadPages() {
             fetch('pages.json')
                 .then(response => response.json())
                 .then(data => {
                     pages = data.pages;
-                    if (data.slideDelay) {
-                        slideDelay = data.slideDelay;
-                    }
+                    if (data.slideDelay) slideDelay = data.slideDelay;
+                    if (data.clockVisible !== undefined) clockVisible = data.clockVisible;
+                    if (data.clockSize) clockSize = data.clockSize;
+                    updateClockVisibility();
                     showNextPage();
                 })
                 .catch(error => {
@@ -74,11 +75,18 @@
                 });
         }
 
+        function updateClockVisibility() {
+            const clockElement = document.getElementById('clock');
+            clockElement.style.display = clockVisible ? 'block' : 'none';
+            clockElement.style.fontSize = clockSize === 'large' ? '5vw' : '3vw';
+        }
+
         function showNextPage() {
             if (pages.length > 0) {
                 let page = pages[currentIndex];
                 let contentDiv = document.getElementById('content');
                 contentDiv.innerHTML = '';
+                contentDiv.style.color = page.textColor || 'rgba(255, 255, 255, 1)';
                 
                 page.lines.forEach(line => {
                     let lineElem = document.createElement('div');
