@@ -49,29 +49,31 @@
         <button class="button" onclick="authenticate()">Login</button>
         
         <div id="editor" style="display:none;">
-            <label for="clockVisible">Clock Visible:</label>
+            <label for="clockVisible">Do you want the clock to be visible?</label>
             <select id="clockVisible">
                 <option value="true">Yes</option>
                 <option value="false">No</option>
             </select>
             
-            <label for="clockSize">Clock Size:</label>
+            <label for="clockSize">Clock large or small?</label>
             <select id="clockSize">
                 <option value="small">Small</option>
                 <option value="large">Large</option>
             </select>
             
-            <label for="clockColor">Clock Color (RGBA):</label>
+            <label for="clockColor">What colour should the clock numbers be?:</label>
             <input type="text" id="clockColor" value="rgba(200, 200, 200, 1)">
             
-            <label for="slideDelay">Slide Delay (Seconds):</label>
+            <label for="slideDelay">How many seconds before the pages change?</label>
             <input type="number" id="slideDelay" value="30">
             
+            <p>Use the page button to add new pages, you may add as many pages as you like.</p>
+
             <h3>Pages</h3>
             <div id="pages"></div>
             <button class="button" onclick="addPage()">Add Page</button>
             <br><br>
-            <button class="button" onclick="saveJson()">Save JSON</button>
+            <button class="button" onclick="saveJson()">Save Changes</button>
         </div>
     </div>
     
