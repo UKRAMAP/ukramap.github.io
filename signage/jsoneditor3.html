@@ -97,13 +97,13 @@
     </div>
 
     <script>
-        const PASSWORD = "Not4Girls"; // Change this for security
+        const PASSWORD = "admin123"; // Change this for security
 
         function authenticate() {
             let passInput = document.getElementById('password').value;
             if (passInput === PASSWORD) {
                 document.getElementById('editor').style.display = 'block';
-                document.getElementById('login-section').style.display = 'none'; // Hide login section after success
+                document.getElementById('login-section').style.display = 'none';
             } else {
                 alert('Incorrect password!');
             }
@@ -172,30 +172,57 @@
 
         function uploadToGitHub(jsonData) {
             let token = "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"; // GitHub token
-            let repo = "UKRAMAP/ukramap.github.io"; // GitHub repo
-            let filePath = "pages.json";
+            let repo = "UKRAMAP/ukramap.github.io"; // Replace with your GitHub repo
+            let filePath = "signage/pages.json";
 
+            // Step 1: Get existing file SHA
             fetch(`https://api.github.com/repos/${repo}/contents/${filePath}`, {
-                method: "PUT",
+                method: "GET",
                 headers: {
                     "Authorization": `token ${token}`,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    message: "Updating JSON",
-                    content: btoa(JSON.stringify(jsonData, null, 2))
-                })
-            }).then(response => response.json())
-              .then(data => alert("JSON Updated Successfully!"))
-              .catch(error => alert("Error updating JSON"));
+                    "Accept": "application/vnd.github.v3+json"
+                }
+            })
+            .then(response => response.json())
+            .then(fileData => {
+                const sha = fileData.sha; // Current file SHA
+
+                // Step 2: Update file with SHA
+                return fetch(`https://api.github.com/repos/${repo}/contents/${filePath}`, {
+                    method: "PUT",
+                    headers: {
+                        "Authorization": `token ${token}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        message: "Updating JSON via Web Editor",
+                        content: btoa(unescape(encodeURIComponent(JSON.stringify(jsonData, null, 2)))), // Proper base64 encoding
+                        sha: sha
+                    })
+                });
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("JSON Updated Successfully!");
+                } else {
+                    return response.json().then(err => {
+                        console.error("GitHub Error:", err);
+                        alert("Failed to update JSON. Check console for details.");
+                    });
+                }
+            })
+            .catch(error => {
+                console.error("Upload Error:", error);
+                alert("Error uploading JSON. See console for details.");
+            });
         }
 
         function cancelChanges() {
-            window.location.href = "index.html"; // Redirect or replace with desired page
+            window.location.href = "index.html"; // Change to appropriate exit page
         }
 
         function openHelp() {
-            window.open("jsonhelp.html", "_blank"); // Open help page in new tab
+            window.open("jsonhelp.html", "_blank"); // Help page
         }
     </script>
 </body>
