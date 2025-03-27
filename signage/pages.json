@@ -5,14 +5,14 @@
     "slideDelay":10,
     "pages": [
         {
-            "textColor": "rgba(255,0,0,1)",
+            "textColor": "rgba(255,255,255, 1)",
             "lines": [
-            { "text": "Solar across the spectrum", "fontSize": 8, "bold": true },
+            { "text": "Solar in radio frequencies", "fontSize": 8, "bold": true },
             { "text": "For those with 2nd show ticket", "fontSize": 6, "italic": true},
-            { "text": "Time 10:15 to 10:45", "fontSize": 6, "italic": true } ] },
+            { "text": "Time 10:15 to 10:45", "fontSize": 6, "italic": false } ] },
         { "lines": [
-            { "text": "Lecture two", "fontSize": 10, "bold": true },
-            { "text": "Times 10:00,13:00", "fontSize": 8, "bold": true, "italic": true } ] },
+            { "text": "Lecture two", "fontSize": 8, "bold": true },
+            { "text": "Times 10:00,13:00", "fontSize": 6, "bold": true, "italic": true } ] },
         { "lines": [ 
             { "text": "Follow us on social media", "fontSize": 8, "italic": true },
             { "text": "@obs king", "fontSize": 8, "bold": true, "underline": true } ] }
