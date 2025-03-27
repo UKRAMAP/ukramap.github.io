@@ -7,9 +7,9 @@
         {
             "textColor": "rgba(255,0,0,1)",
             "lines": [
-            { "text": "Lecture One", "fontSize": 10, "bold": true },
-            { "text": "by Big Dave", "fontSize": 8, "italic": true},
-            { "text": "Times 09:00, 10:30", "fontSize": 8, "italic": true } ] },
+            { "text": "Solar across the spectrum", "fontSize": 10, "bold": true },
+            { "text": "For those with 2nd show ticket", "fontSize": 8, "italic": true},
+            { "text": "Time 10:15 to 10:45", "fontSize": 8, "italic": true } ] },
         { "lines": [
             { "text": "Lecture two", "fontSize": 10, "bold": true },
             { "text": "Times 10:00,13:00", "fontSize": 8, "bold": true, "italic": true } ] },
