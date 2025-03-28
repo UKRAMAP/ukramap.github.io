@@ -2,7 +2,7 @@
     "clockVisible":true,
     "clockSize":"large",
     "clockColor": "rgba(150,150,150, 1)",
-    "slideDelay":10,
+    "slideDelay":30,
     "pages": [
         {
             "textColor": "rgba(255,255,255, 1)",
@@ -13,6 +13,7 @@
         { "lines": [
             { "text": "Solar Max Occultation", "fontSize": 6, "bold": true },
 			{ "text": "Time 11:03", "fontSize": 6, "italic": true},
+			{ "text": "~ ", "fontSize": 6 },
             { "text": "Planetarium shows 12:00 & 12:30", "fontSize": 6, "bold": true, "italic": true } ] },
         { "lines": [ 
             { "text": "Solar in radio frequencies", "fontSize": 8, "bold": true },
