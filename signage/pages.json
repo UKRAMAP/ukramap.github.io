@@ -9,12 +9,14 @@
             "lines": [
             { "text": "Solar in radio frequencies", "fontSize": 8, "bold": true },
             { "text": "For those with 2nd show ticket", "fontSize": 6, "italic": true},
-            { "text": "Time 10:15 to 10:45", "fontSize": 6, "italic": false } ] },
+            { "text": "Start time 10:15", "fontSize": 6, "italic": false } ] },
         { "lines": [
-            { "text": "Lecture two", "fontSize": 8, "bold": true },
-            { "text": "Times 10:00,13:00", "fontSize": 6, "bold": true, "italic": true } ] },
+            { "text": "Solar Max Occultation", "fontSize": 6, "bold": true },
+			{ "text": "Time 11:03", "fontSize": 6, "italic": true},
+            { "text": "Planetarium shows 12:00 & 12:30", "fontSize": 6, "bold": true, "italic": true } ] },
         { "lines": [ 
-            { "text": "Follow us on social media", "fontSize": 8, "italic": true },
-            { "text": "@obs king", "fontSize": 8, "bold": true, "underline": true } ] }
+            { "text": "Solar in radio frequencies", "fontSize": 8, "bold": true },
+            { "text": "For those with 1st show ticket", "fontSize": 6, "italic": true},
+            { "text": "Start time 13:00", "fontSize": 6, "bold": true, "underline": false } ] }
            ]
 }
