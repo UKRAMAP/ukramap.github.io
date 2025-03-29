@@ -11,9 +11,9 @@
             { "text": "For those with 2nd show ticket", "fontSize": 6, "italic": true},
             { "text": "Running time 30 mins", "fontSize": 6, "italic": false } ] },
         { "lines": [
-            { "text": "{Planetarium", "fontSize": 6, "bold": true },
+            { "text": "Planetarium", "fontSize": 6, "bold": true },
 			{ "text": " ", "fontSize": 6, "italic": true},
-			{ "text": "~ ", "fontSize": 6 },
+			{ "text": "~", "fontSize": 6 },
             { "text": "Planetarium shows 19:30 & 20:00", "fontSize": 6, "bold": true, "italic": true } ] },
         { "lines": [ 
             { "text": "20:30 Meteor talk", "fontSize": 8, "bold": true },
