@@ -7,17 +7,17 @@
         {
             "textColor": "rgba(255,255,255, 1)",
             "lines": [
-            { "text": "Solar in radio frequencies", "fontSize": 8, "bold": true },
+            { "text": "19:00 to 1930: Meteor talk", "fontSize": 8, "bold": true },
             { "text": "For those with 2nd show ticket", "fontSize": 6, "italic": true},
-            { "text": "Start time 10:15", "fontSize": 6, "italic": false } ] },
+            { "text": "Start time 19:00", "fontSize": 6, "italic": false } ] },
         { "lines": [
-            { "text": "Solar Max Occultation", "fontSize": 6, "bold": true },
-			{ "text": "Time 11:03", "fontSize": 6, "italic": true},
+            { "text": "{Planetarium", "fontSize": 6, "bold": true },
+			{ "text": " ", "fontSize": 6, "italic": true},
 			{ "text": "~ ", "fontSize": 6 },
-            { "text": "Planetarium shows 12:00 & 12:30", "fontSize": 6, "bold": true, "italic": true } ] },
+            { "text": "Planetarium shows 19:30 & 20:00", "fontSize": 6, "bold": true, "italic": true } ] },
         { "lines": [ 
-            { "text": "Solar in radio frequencies", "fontSize": 8, "bold": true },
-            { "text": "For those with 1st show ticket", "fontSize": 6, "italic": true},
-            { "text": "Start time 13:00", "fontSize": 6, "bold": true, "underline": false } ] }
+            { "text": " ", "fontSize": 8, "bold": true },
+            { "text": "21:00 FINISH", "fontSize": 6, "italic": true},
+            { "text": " ", "fontSize": 6, "bold": true, "underline": false } ] }
            ]
 }
