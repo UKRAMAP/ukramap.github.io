@@ -2,7 +2,7 @@
     "clockVisible":true,
     "clockSize":"large",
     "clockColor": "rgba(150,150,150, 1)",
-    "slideDelay":10,
+    "slideDelay":30,
     "pages": [
         {
             "textColor": "rgba(255,255,255, 1)",
