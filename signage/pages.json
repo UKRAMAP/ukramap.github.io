@@ -17,7 +17,7 @@
             { "text": "Planetarium shows 19:30 & 20:00", "fontSize": 6, "bold": true, "italic": true } ] },
         { "lines": [ 
             { "text": "20:30 Meteor talk", "fontSize": 8, "bold": true },
-            { "text": "For those that had 1st show ticket", "fontSize": 6, "italic": true},
+            { "text": "For those who had 1st show ticket", "fontSize": 6, "italic": true},
             { "text": "Running time 30 mins", "fontSize": 6, "italic": true, "underline": false } ] }
            ]
 }
