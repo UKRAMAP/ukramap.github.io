@@ -13,7 +13,7 @@
         { "lines": [
             { "text": "Planetarium", "fontSize": 6, "bold": true },
 			{ "text": " ", "fontSize": 6, "italic": true},
-			{ "text": "~", "fontSize": 6 },
+			{ "text": "UNDER 5's, 10 minute show!!", "fontSize": 6 },
             { "text": "Morning shows 11:30 & 12:00", "fontSize": 6, "bold": true, "italic": true } ] },
         { "lines": [ 
             { "text": "14:45 solar talk", "fontSize": 8, "bold": true },
