@@ -15,7 +15,6 @@
 			{ "text": " ", "fontSize": 6, "italic": true},
             { "text": "Morning shows 11:30 & 12:00", "fontSize": 6, "bold": true, "italic": true } ] },
             { "text": "UNDER 5's 10 minute show! 12:30", "fontSize": 6 },
-
         { "lines": [ 
             { "text": "14:45 solar talk", "fontSize": 8, "bold": true },
             { "text": "16:15 Meteor detection", "fontSize": 6, "italic": true},
