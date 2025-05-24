@@ -21,8 +21,8 @@
             { "text": "Running time 30 mins", "fontSize": 6, "italic": true, "underline": false } ] },
         { "lines": [
             { "text": "Planetarium", "fontSize": 6, "bold": true },
-            { "text": "Afternoon shows 15:30, 16:00", "fontSize": 6, "italic": true},
-            { "text": "Running tome 30 mins", "fontSize": 6 },
+            { "text": "~", "fontSize": 6, "italic": true},
+            { "text": "Afternoon shows 15:30, 16:00", "fontSize": 6 },
             { "text": " ", "fontSize": 6,"italic": true, "underline": false} ] }
             ]
         }
