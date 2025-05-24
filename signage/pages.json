@@ -7,8 +7,8 @@
         {
             "textColor": "rgba(255,255,255, 1)",
             "lines": [
-            { "text": "10:45 Solar talk", "fontSize": 8, "bold": true },
-            { "text": "12:15 Meteor detection", "fontSize": 6, "italic": true},
+            { "text": "10:45 Meteor detection", "fontSize": 8, "bold": true },
+            { "text": "12:15 Solar talk", "fontSize": 6, "italic": true},
             { "text": "Running time 30 mins", "fontSize": 6, "italic": false } ] },
         { "lines": [
             { "text": "Planetarium", "fontSize": 6, "bold": true },
@@ -16,13 +16,13 @@
             { "text": "Morning shows 11:30, 12:00", "fontSize": 6, "bold": true, "italic": true },
             { "text": " ", "fontSize": 6 } ] },
         { "lines": [ 
-            { "text": "14:45 solar talk", "fontSize": 8, "bold": true },
-            { "text": "16:15 Meteor detection", "fontSize": 6, "italic": true},
+            { "text": "14:45 Meteor detection", "fontSize": 8, "bold": true },
+            { "text": "16:15 Solar talk", "fontSize": 6, "italic": true},
             { "text": "Running time 30 mins", "fontSize": 6, "italic": true, "underline": false } ] },
         { "lines": [
             { "text": "Planetarium", "fontSize": 6, "bold": true },
-            { "text": "~", "fontSize": 6, "italic": true},
-            { "text": "UNDER 5's 10 minute show! 15:00", "fontSize": 6 },
+            { "text": "Afternoon shows 15:30, 16:00", "fontSize": 6, "italic": true},
+            { "text": "Running tome 30 mins", "fontSize": 6 },
             { "text": " ", "fontSize": 6,"italic": true, "underline": false} ] }
             ]
         }
