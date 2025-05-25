@@ -7,8 +7,8 @@
         {
             "textColor": "rgba(255,255,255, 1)",
             "lines": [
-            { "text": "11:45 Meteor detection", "fontSize": 6, "bold": true },
-            { "text": "12:30 Solar talk", "fontSize": 6, "bold": true, "italic": false },
+            { "text": "10:45 Meteor detection", "fontSize": 6, "bold": true },
+            { "text": "12:45 Solar talk", "fontSize": 6, "bold": true, "italic": false },
             { "text": "Running time 30 mins", "fontSize": 6, "italic": true } ] },
         { "lines": [
             { "text": "Planetarium", "fontSize": 6, "bold": true },
@@ -17,7 +17,7 @@
             { "text": " ", "fontSize": 6 } ] },
         { "lines": [ 
             { "text": "14:45 Meteor detection", "fontSize": 6, "bold": true },
-            { "text": "16:30 Solar talk", "fontSize": 6, "bold": true, "italic": false },
+            { "text": "16:45 Solar talk", "fontSize": 6, "bold": true, "italic": false },
             { "text": "Running time 30 mins", "fontSize": 6, "italic": true } ] },
         { "lines": [
             { "text": "Planetarium", "fontSize": 6, "bold": true },
